@@ -1,4 +1,4 @@
-// Abstract class of Card, that represents a Card
+// Abstract class representing a single Card
 
 import java.util.Comparator;
 abstract class Card implements Comparable<Card>{

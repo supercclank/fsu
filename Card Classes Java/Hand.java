@@ -1,4 +1,7 @@
+// Concrete class representing a hand of cards
+
 public class Hand {
+    // Array of Cards that make up the hand
     private Card[] hand;
     private int size;
     private int current;

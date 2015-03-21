@@ -1,4 +1,8 @@
+// Concrete class representing a computer player in a card game
+
 public class ComputerCardPlayer extends Computer {
+
+    // Hand of cards that belong to the computer player
     private Hand hand;
     
     public ComputerCardPlayer(int difficulty, String ip, int score, int playerNumber, Hand hand) {
