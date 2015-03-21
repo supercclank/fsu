@@ -41,4 +41,12 @@ public class Hand {
         return 0;
     }
 
+    public String toString() {
+        String returnString = "";
+        for(int x = 0; x < size; x++) {
+            returnString = returnString + hand[x].toString();
+        }
+        return returnString;
+    }
+
 }

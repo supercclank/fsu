@@ -10,7 +10,6 @@ public class Card {
     private Integer value;
     private Integer points;
     private String name;
-    private Comparator<Card> comparator;
     private Suit suit;
 
     public enum Suit {
@@ -58,6 +57,6 @@ public class Card {
     }
 
     public String toString() {
-        return " Value: " + value + " Points: " + points + " Name: " + name + " Comparator: " + comparator + " suit: " + suit;
+        return " Value: " + value + " Points: " + points + " Name: " + name + " suit: " + suit;
     }
 }
