@@ -1,5 +1,3 @@
-package game;
-
 import java.util.Comparator;
 
 // Concrete class representing a card in a blackjack game

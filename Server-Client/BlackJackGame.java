@@ -1,9 +1,6 @@
 // Concrete class representing a blackjack game
 public class BlackJackGame extends CardGame {
 
-    // current is only used in constructor
-    private int current;
-
     private BlackJackDeck deck;
     private int numberHumans;
     private int humansFinished;
@@ -12,7 +9,6 @@ public class BlackJackGame extends CardGame {
     public BlackJackGame(int numHumans, String ip) throws Exception {
         setSize(numHumans + 1);
         super.addPlayer(new ComputerBlackJackPlayer(ip, 0));
-        current = 1;
         deck = new BlackJackDeck();
         this.numberHumans = numHumans;
         humansFinished = 0;
@@ -50,7 +46,8 @@ public class BlackJackGame extends CardGame {
         Player[] players = getPlayers();
         ComputerBlackJackPlayer dealer = (ComputerBlackJackPlayer) players[0];
         BlackJackPlayer bp;
-
+        humansFinished = 0;
+        numberBlackJacks = 0;
         for(int x = 0; x < numberHumans; x++) {
             bp = (BlackJackPlayer) players[1 + x]; // offset for computer player
 

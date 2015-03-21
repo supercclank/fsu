@@ -1,5 +1,9 @@
 import java.util.Comparator;
+
+// Concrete class representing a card in a blackjack game
+
 public class BlackJackCard extends Card {
+
     public BlackJackCard(int value, String name, Suit suit) {
         this.setValue(new Integer(value));
         this.setName(name);
@@ -26,6 +30,7 @@ public class BlackJackCard extends Card {
             break;
         }
     }
+    
     public static class BlackJackComparator<T> implements Comparator<T> {
         public int compare(T a, T b) {
             Card aCard = (BlackJackCard) a;

@@ -6,7 +6,7 @@ public class BlackJackPlayer extends CardPlayer {
     private boolean bust;
     private boolean blackJack;
     private boolean canSplit;
-    private BlackJackCard[] dealersTwo;
+    private Hand dealersTwo;
 
     public BlackJackPlayer(String ip,  int playerNumber){
         super(ip, 0, playerNumber, new BlackJackHand());
@@ -14,7 +14,7 @@ public class BlackJackPlayer extends CardPlayer {
         bust = false;
         blackJack = false;
         canSplit = false;
-        dealersTwo = new BlackJackCard[2];
+        dealersTwo = new BlackJackHand();
     }
 
     public void getCard(Card c) {
@@ -29,9 +29,7 @@ public class BlackJackPlayer extends CardPlayer {
     }
 
     public void setDealersTwo(BlackJackHand bh) {
-        Card[] bjh = bh.getHand();
-        dealersTwo[0] = (BlackJackCard) bjh[0];
-        dealersTwo[1] = (BlackJackCard) bjh[1]; 
+        dealersTwo = bh;
     }
 
     public boolean isStick() {
@@ -70,7 +68,7 @@ public class BlackJackPlayer extends CardPlayer {
         canSplit = false;
     }
 
-    public BlackJackCard[] getDealersTwo() {
+    public Hand getDealersTwo() {
         return dealersTwo;
     }
 }

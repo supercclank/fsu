@@ -1,5 +1,3 @@
-package game;
-
 import java.util.Comparator;
 
 // Abstract class representing a single Card
