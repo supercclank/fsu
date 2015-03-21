@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.*;
-
 public class GameServer2
 {
    private BlackJackGame game;
@@ -25,6 +24,16 @@ public class GameServer2
          sockNums[x] = 1 + x + listenPort;
       }
 
+   }
+
+   public void nuke() {
+      BlackJackGame game = null;
+      ServerSocket serverSockets[] = null;
+      Socket clientSockets[] = null;
+      BufferedReader[] inFromClient = null;
+      String[] clientRequest = null; 
+      DataOutputStream outToClient[] = null;
+      int[] sockNums = null;
    }
 
    public ServerSocket[] getSockets() {
@@ -53,7 +62,6 @@ public class GameServer2
          clientRequest[x] = "";
          outToClient[x] = new DataOutputStream(clientSockets[x].getOutputStream()); 
       }
-      System.out.println("making buffers");
    }
 
    public DataOutputStream[] outToClients() {
@@ -74,16 +82,15 @@ public class GameServer2
          clientSockets[x].shutdownOutput();
       }
    }
-   public static void main(String argv[]) throws Exception
-      {
-         int startingSocket = 6789;
+
+   public static void runServer() throws Exception{
+      int startingSocket = 6789;
          int numPlayers;
          GameServer2 server;
          BlackJackGame game;
          BlackJackPlayer[] players;
          String messageToClient;
          Hand  dealersTwo;
-         while(true) {
            
             ServerSocket welcomeSocket = new ServerSocket(startingSocket);
             Socket connectionSocket = welcomeSocket.accept();
@@ -106,9 +113,6 @@ public class GameServer2
             String clientRequestPlayer1 = inFromPlayer1.readLine();
             numPlayers = Integer.parseInt(clientRequestPlayer1);
             server = new GameServer2(6789,numPlayers, connectionSocket, welcomeSocket);
-            // welcomeSocket = new ServerSocket(startingSocket);
-            // connectionSocket = welcomeSocket.accept();
-            System.out.println(numPlayers);
             int numLeft = numPlayers;
             for(int x = 1; x < numLeft; x++) {
                welcomeSocket = new ServerSocket(startingSocket);
@@ -120,7 +124,6 @@ public class GameServer2
                connectionSocket.close();
                welcomeSocket.close();
             }
-            System.out.println("bufferTIMES");
             server.initializeBuffers();
             server.startGame(numPlayers,"a");
             game = server.getGame();
@@ -148,12 +151,9 @@ public class GameServer2
                } 
             //this is funky fix probably
             while(!server.getGame().isOver()) {
-               System.out.println("at the top");
                server.initializeBuffers();
                for(int x = 0; x < numPlayers; x++) {
-                  System.out.println("Q");
                   server.getRequests()[x] = server.inFromClients()[x].readLine();
-                  System.out.println("A");
                }
                for(int x = 0; x < numPlayers; x++) {
                   if (!(server.getRequests()[x].equals("step"))) {
@@ -169,20 +169,36 @@ public class GameServer2
                server.initializeBuffers();
                if(!server.getGame().isOver()) {
                   for(int x =0; x < numPlayers; x++) {
-                     System.out.println("shdfjkahsdkfhj");
                      server.outToClients()[x].writeBytes("continue" + "\n");
-                     System.out.println("written");
+                  }
+               } else {
+                  for(int x =0; x < numPlayers; x++) {
+                     server.outToClients()[x].writeBytes("stop" + "\n");
                   }
                }
             }
+            for(int x = 0; x < numPlayers; x++) {
+                  messageToClient = Message.makeMessage(players[x].getHand());
+                  server.outToClients()[x].writeBytes(messageToClient + "\n");
+            }
             server.initializeBuffers();
+            for(int x = 0; x < numPlayers; x++) {
+                messageToClient = "" + Message.makeMessage(((ComputerBlackJackPlayer)(game.getPlayers())[0]).getHand());
+                server.outToClients()[x].writeBytes(messageToClient + "\n");
+            }
             for(int x = 0; x < numPlayers; x++) {
                messageToClient = "" + players[x].isWinner();
                server.outToClients()[x].writeBytes(messageToClient + "\n");
             }
           server.closeSockets();
+          server.nuke();
 
-         }
-            
+   }
+   public static void main(String argv[]) throws Exception
+      {
+                 while(true) {
+                     runServer();
+
+                 }    
       }
-}
+}  

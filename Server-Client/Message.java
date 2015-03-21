@@ -6,9 +6,9 @@ public class Message{
         return json;
     }
 
-    public static Hand unpackMessage(String json) {
+    public static BlackJackHand unpackMessage(String json) {
         Gson gson = new Gson();
-        Hand h = (Hand) gson.fromJson(json, Hand.class);
-        return new Hand(1);
+        BlackJackHand h = gson.fromJson(json, BlackJackHand.class);
+        return h;
     }
 }

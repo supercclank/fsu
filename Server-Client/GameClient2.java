@@ -48,16 +48,17 @@ public class GameClient2
 
  public static void runClient() throws Exception {
       String command = "start";
+      BlackJackHand playerHand;
       String encodedPlayersHand = "";
       String encodedDealerHand = "";
-      GameClient client = new GameClient("localhost", 6789);
+      GameClient2 client = new GameClient2("localhost", 6789);
       String result = "";
       Socket clientSocket = new Socket(client.getIp(), client.getPort());
       DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
       BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
       client.setPort(Integer.parseInt(inFromServer.readLine()));
       
-      System.out.println(client.getPort());
+      System.out.println("Assigned Port# "+client.getPort());
       clientSocket = new Socket(client.getIp(), client.getPort());
       
       outToServer = new DataOutputStream(clientSocket.getOutputStream());
@@ -72,30 +73,37 @@ public class GameClient2
       outToServer.writeBytes(command + "\n");
       encodedDealerHand = inFromServer.readLine();
       client.setDealers(Message.unpackMessage(encodedDealerHand));
-      System.out.println(encodedDealerHand);
-      //good up to here
+      System.out.println(client.getDealerHand());
       command = "go";
       outToServer.writeBytes(command + "\n");
       encodedPlayersHand = inFromServer.readLine();
-      System.out.println(encodedPlayersHand);
       client.setPlayerHand(Message.unpackMessage(encodedPlayersHand));
+      System.out.println(client.getPlayerHand());
+      System.out.println(client.getPlayerHand().handValue());
       while(true) {
         command = client.prompt();
-        System.out.println(command);
         outToServer.writeBytes(command + "\n");
-        if(command.equals("step")) {
-          encodedPlayersHand = inFromServer.readLine();
-          System.out.println(encodedPlayersHand);
-          result = inFromServer.readLine();
-          System.out.println(result);
-          if (!result.equals("continue")) {
-            break;
-          }
-        } else {
-          result = inFromServer.readLine();
+        encodedPlayersHand = inFromServer.readLine();
+        playerHand = Message.unpackMessage(encodedPlayersHand);
+        System.out.println(playerHand);
+        System.out.println(playerHand.handValue());
+        result = inFromServer.readLine();
+        if (!result.equals("continue")) {
           break;
-        }
+          }
       }
+      encodedPlayersHand = inFromServer.readLine();
+      playerHand = Message.unpackMessage(encodedPlayersHand);
+      System.out.println(playerHand);
+      System.out.println(playerHand.handValue());
+
+      encodedDealerHand = inFromServer.readLine();
+      
+      client.setDealers(Message.unpackMessage(encodedDealerHand));
+      System.out.println("**************Dealers "+client.getDealerHand()+"**************\n");
+
+      result = inFromServer.readLine();
+      System.out.println(result);
       clientSocket.close();
     }  
 
