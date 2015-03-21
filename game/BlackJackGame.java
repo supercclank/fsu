@@ -118,7 +118,7 @@ public class BlackJackGame extends CardGame {
 
     public void checkDoubles(BlackJackPlayer bp) {
         Card[] bjh = bp.getHand().getHand();
-        if(0 == bjh[0].compareTo(bjh[1])) {
+        if(0 == bjh[0].compare(bjh[1], new BlackJackCard.BlackJackComparator<Card>())) {
             bp.splittable();
         }
     }

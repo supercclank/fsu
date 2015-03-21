@@ -11,7 +11,6 @@ public class BlackJackCard extends Card {
         this.setName(name);
         calculatePoints();
         this.setSuit(suit);
-        this.setComparator(new BlackJackComparator<Card>());
     }
 
     public void calculatePoints() {
@@ -34,8 +33,7 @@ public class BlackJackCard extends Card {
         }
     }
     
-    private static class BlackJackComparator<T> implements Comparator<T> {
-
+    public static class BlackJackComparator<T> implements Comparator<T> {
         public int compare(T a, T b) {
             Card aCard = (BlackJackCard) a;
             Card bCard = (BlackJackCard) b;
