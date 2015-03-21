@@ -1,12 +1,16 @@
 package game;
 
+// Concrete class that represents a player's hand
+
 public class BlackJackHand extends Hand {
+
     private int handValue;
 
     public BlackJackHand() {
         super(9);
     }
 
+    // computes the value of the hand
     public int handValue() {
         int numAces = 0;
         int total = 0;

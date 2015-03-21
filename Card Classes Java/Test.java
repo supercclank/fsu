@@ -1,8 +1,13 @@
 package game;
 
 import java.util.Scanner;
+
+// Driver class to test the blackjack game
+
 public class Test {
+
     private static BlackJackCard[] dealersTwo;
+    
     public static void main(String[] args) throws Exception {
         Scanner s = new Scanner(System.in);
         BlackJackGame myGame = new BlackJackGame(1,"b");

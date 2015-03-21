@@ -1,6 +1,9 @@
 package game;
 
+// Concrete class representing a human blackjack player
+
 public class BlackJackPlayer extends CardPlayer {
+
     private boolean stick;
     private boolean bust;
     private boolean blackJack;

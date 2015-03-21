@@ -1,9 +1,13 @@
 package game;
 
-abstract class CardGame{
+// abstract class representing a card game
+
+abstract class CardGame {
+
     private Player[] playerList;
     private boolean over;
 
+    // sets the size of the game, i.e. how many players are in the game
     public void setSize(int numPlayers) {
         playerList = new Player[numPlayers];
     }
