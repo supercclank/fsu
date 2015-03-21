@@ -1,5 +1,11 @@
+// Abstract class of Card, that represents a Card
+
 import java.util.Comparator;
 abstract class Card implements Comparable<Card>{
+
+    // value: numeric value of the card
+    // point: point value of card in a particular game
+    // name: ace, one, two, ... , ten, jack, queen, king
     private Integer value;
     private Integer points;
     private String name;
