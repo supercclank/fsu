@@ -9,24 +9,23 @@ public class BlackJackCard extends Card {
     }
 
     public void calculatePoints() {
-        switch (this.getName()) {
-        case "ace" :
+        switch (this.getValue()) {
+        case 1 :
             this.setPoints(11);
             break;
-        case "jack":
+        case 11:
             this.setPoints(10);
             break;
-        case "queen":
+        case 12:
            this.setPoints(10);
             break;
-        case "king":
+        case 13:
             this.setPoints(10);
             break;
         default:
             this.setPoints(this.getValue());
             break;
         }
-        this.setPoints(this.getValue());
     }
     private static class BlackJackComparator<T> implements Comparator<T> {
         public int compare(T a, T b) {

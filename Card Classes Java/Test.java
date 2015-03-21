@@ -1,10 +1,26 @@
+import java.util.Scanner;
 public class Test {
+    private static BlackJackCard[] dealersTwo;
     public static void main(String[] args) throws Exception {
-        Player player1 = new BlackJackPlayer("derp", 1);
-        Computer cpu1 = new ComputerBlackJackPlayer("q",1);
-        System.out.println(player1);
-        System.out.println(cpu1);
-        Deck x = new BlackJackDeck();
-    }
+        Scanner s = new Scanner(System.in);
+        BlackJackGame myGame = new BlackJackGame(1,"b");
+        BlackJackPlayer p = new BlackJackPlayer("a", 1);
+        myGame.addPlayer(p);
+        myGame.firstStep();
+        dealersTwo = p.getDealersTwo();
+        while(!myGame.isOver()) {
+            Card[] hand = p.getHand().getHand();
+                int x = s.nextInt();
+                if (x == 0) {
+                    p.stick();
+                }
+            myGame.stepGame();
+            }
+            if(p.isWinner()) {
+                System.out.println("won");
+            } else {
+                System.out.println("loser");
+            }
+        }
 
 }
