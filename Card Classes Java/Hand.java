@@ -11,6 +11,7 @@ public class Hand {
 
     public void addToHand(Card c) {
         hand[current++] = c;
+        size++;
     }
 
     public void moveCards(int a, int b) {
@@ -30,6 +31,10 @@ public class Hand {
 
     public int size() {
         return size;
+    }
+
+    public int handValue() {
+        return 0;
     }
 
 }

@@ -1,5 +1,6 @@
 public class CardPlayer extends Player {
     private Hand hand;
+
     public CardPlayer(String ip, int score, int playerNumber, Hand hand) {
         this.setIp(ip);
         this.setScore(score);
