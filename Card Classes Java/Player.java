@@ -2,7 +2,7 @@ abstract class Player {
     private int score;
     private int playerNumber;
     private String ip;
-
+    
     public void setScore(int score) {
         this.score = score;
     }
@@ -31,5 +31,4 @@ abstract class Player {
     public String toString() {
         return "IP: "+ ip + " Score: " + score + " PlayerNumber: " + playerNumber;
     }
-
 }
