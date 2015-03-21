@@ -1,4 +1,7 @@
+package game;
+
 import java.util.Comparator;
+
 public class BlackJackCard extends Card {
     public BlackJackCard(int value, String name, Suit suit) {
         this.setValue(new Integer(value));

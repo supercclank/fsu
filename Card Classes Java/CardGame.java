@@ -1,3 +1,5 @@
+package game;
+
 abstract class CardGame{
     private Player[] playerList;
     private boolean over;

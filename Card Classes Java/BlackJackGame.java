@@ -1,3 +1,5 @@
+package game;
+
 public class BlackJackGame extends CardGame {
     private int current;
     private BlackJackDeck deck;

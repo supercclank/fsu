@@ -1,5 +1,7 @@
 // Abstract class representing a Player
 
+package game;
+
 abstract class Player {
     // ip - IP address in dotted quad notation?
     private int score;

@@ -1,4 +1,7 @@
+package game;
+
 public class CardPlayer extends Player {
+
     private Hand hand;
 
     public CardPlayer(String ip, int score, int playerNumber, Hand hand) {

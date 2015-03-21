@@ -1,5 +1,7 @@
 // Abstract class representing a Computer Player
 
+package game;
+
 abstract class Computer extends Player {
     int difficulty;
 

@@ -1,3 +1,5 @@
+package game;
+
 public class BlackJackPlayer extends CardPlayer {
     private boolean stick;
     private boolean bust;

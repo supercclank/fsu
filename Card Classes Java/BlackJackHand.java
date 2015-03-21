@@ -1,4 +1,6 @@
-    public class BlackJackHand extends Hand {
+package game;
+
+public class BlackJackHand extends Hand {
     private int handValue;
 
     public BlackJackHand() {
