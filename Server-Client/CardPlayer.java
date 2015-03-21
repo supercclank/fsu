@@ -1,5 +1,3 @@
-package game;
-
 // Concrete class representing a human player in a card game
 
 public class CardPlayer extends Player {

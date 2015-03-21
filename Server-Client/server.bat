@@ -1,1 +1,1 @@
-java -cp .;gson-2.3.1.jar Server
+java -cp .;gson-2.3.1.jar GameServer2

@@ -1,5 +1,12 @@
 import java.util.Comparator;
+
+// Abstract class representing a single Card
+
 public class Card {
+
+    // value: numeric value of the card
+    // point: point value of card in a particular game
+    // name: ace, one, two, ... , ten, jack, queen, king
     private Integer value;
     private Integer points;
     private String name;
@@ -11,7 +18,7 @@ public class Card {
     }
 
     public void calculatePoints() {
-        
+
     }
 
     public void setValue(Integer value) {
@@ -46,7 +53,7 @@ public class Card {
         return suit;
     }
 
-    public int compare(Comparator<Card> comparator, Card c) {
+    public int compare(Card c, Comparator<Card> comparator) {
         return comparator.compare(this,c);
     }
 

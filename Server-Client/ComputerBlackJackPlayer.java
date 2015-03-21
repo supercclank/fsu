@@ -1,5 +1,3 @@
-package game;
-
 // Concrete class representing a computer player in a blackjack game
 
 public class ComputerBlackJackPlayer extends ComputerCardPlayer {

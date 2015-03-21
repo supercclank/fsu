@@ -1,5 +1,3 @@
-package game;
-
 // Concrete class that represents a player's hand
 
 public class BlackJackHand extends Hand {

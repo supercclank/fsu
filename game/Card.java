@@ -1,10 +1,8 @@
-package game;
-
 import java.util.Comparator;
 
 // Abstract class representing a single Card
 
-abstract class Card implements Comparable<Card>{
+public class Card {
 
     // value: numeric value of the card
     // point: point value of card in a particular game
@@ -19,7 +17,9 @@ abstract class Card implements Comparable<Card>{
         HEARTS, DIAMONDS, SPADES, CLUBS, TRUMP
     }
 
-    abstract void calculatePoints();
+    public void calculatePoints() {
+
+    }
 
     public void setValue(Integer value) {
         this.value = value;
@@ -35,10 +35,6 @@ abstract class Card implements Comparable<Card>{
 
     public void setSuit(Suit suit) {
         this.suit = suit;
-    }
-
-    public void setComparator(Comparator<Card> comparator) {
-        this.comparator = comparator;
     }
 
     public Integer getValue() {
@@ -57,7 +53,7 @@ abstract class Card implements Comparable<Card>{
         return suit;
     }
 
-    public int compareTo(Card c) {
+    public int compare(Card c, Comparator<Card> comparator) {
         return comparator.compare(this,c);
     }
 

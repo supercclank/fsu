@@ -1,5 +1,3 @@
-package game;
-
 // Concrete class representing a hand of cards
 public class Hand {
 

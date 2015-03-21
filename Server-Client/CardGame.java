@@ -1,5 +1,3 @@
-package game;
-
 // abstract class representing a card game
 
 abstract class CardGame {

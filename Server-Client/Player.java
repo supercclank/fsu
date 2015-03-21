@@ -1,5 +1,3 @@
-package game;
-
 // Abstract class representing a Player
 
 abstract class Player {

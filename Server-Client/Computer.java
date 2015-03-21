@@ -1,5 +1,3 @@
-package game;
-
 // Abstract class representing a Computer Player
 
 abstract class Computer extends Player {

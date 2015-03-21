@@ -1,7 +1,4 @@
 // Concrete class representing a computer player in a card game
-
-package game;
-
 public class ComputerCardPlayer extends Computer {
 
     // Hand of cards that belong to the computer player

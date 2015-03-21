@@ -1,5 +1,3 @@
-package game;
-
 import java.lang.reflect.InvocationTargetException;
 
 // Concrete class represents a deck in a blackjack game
