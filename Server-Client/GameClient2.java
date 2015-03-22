@@ -67,6 +67,7 @@ public class GameClient2
 
 
       if(client.getPort() == 6790) {
+        //prompt that is a number for num players (only p1)
               outToServer.writeBytes(client.prompt() + "\n");  
       }
 
@@ -82,6 +83,7 @@ public class GameClient2
       System.out.println(client.getPlayerHand().handValue());
       while(true) {
         command = client.prompt();
+        //step means i want a card, anything else stop
         outToServer.writeBytes(command + "\n");
         encodedPlayersHand = inFromServer.readLine();
         playerHand = Message.unpackMessage(encodedPlayersHand);
