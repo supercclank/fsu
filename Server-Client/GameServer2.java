@@ -9,6 +9,12 @@ public class GameServer2
    private String[] clientRequest; 
    private DataOutputStream outToClient[];
    private int[] sockNums;
+   private int startingSocket = 6789;
+   private int numPlayers;
+   private GameServer2 server;
+   private BlackJackPlayer[] players;
+   private String messageToClient;
+   private Hand  dealersTwo;
    public GameServer2(int listenPort, int players, Socket clientSocket, ServerSocket serverSocket) throws Exception{
       serverSockets = new ServerSocket[players];
       clientSockets = new Socket[players];
@@ -26,14 +32,18 @@ public class GameServer2
 
    }
 
+   public GameServer2(){
+
+   }
+
    public void nuke() {
-      BlackJackGame game = null;
-      ServerSocket serverSockets[] = null;
-      Socket clientSockets[] = null;
-      BufferedReader[] inFromClient = null;
-      String[] clientRequest = null; 
-      DataOutputStream outToClient[] = null;
-      int[] sockNums = null;
+      game = null;
+      serverSockets = null;
+      clientSockets = null;
+      inFromClient = null;
+      clientRequest = null; 
+      outToClient = null;
+      sockNums = null;
    }
 
    public ServerSocket[] getSockets() {
@@ -83,14 +93,8 @@ public class GameServer2
       }
    }
 
-   public static void runServer() throws Exception{
-      int startingSocket = 6789;
-         int numPlayers;
-         GameServer2 server;
-         BlackJackGame game;
-         BlackJackPlayer[] players;
-         String messageToClient;
-         Hand  dealersTwo;
+   public void runServer() throws Exception{
+         
            
             ServerSocket welcomeSocket = new ServerSocket(startingSocket);
             Socket connectionSocket = welcomeSocket.accept();
@@ -146,7 +150,7 @@ public class GameServer2
                }
                server.initializeBuffers();
                for(int x = 0; x < numPlayers; x++) {
-                  messageToClient = Message.makeMessage(players[x].getHand());
+                  messageToClient = Message.makeMessage(((BlackJackPlayer)game.getPlayers()[x + 1]).getHand());
                   server.outToClients()[x].writeBytes(messageToClient + "\n");
                } 
             //this is funky fix probably
@@ -163,7 +167,7 @@ public class GameServer2
                game.stepGame();
                server.initializeBuffers();
                for(int x = 0; x < numPlayers; x++) {
-                  messageToClient = Message.makeMessage(players[x].getHand());
+                  messageToClient = Message.makeMessage(((BlackJackPlayer)game.getPlayers()[x + 1]).getHand());
                   server.outToClients()[x].writeBytes(messageToClient + "\n");
                }
                server.initializeBuffers();
@@ -177,8 +181,9 @@ public class GameServer2
                   }
                }
             }
+
             for(int x = 0; x < numPlayers; x++) {
-                  messageToClient = Message.makeMessage(players[x].getHand());
+                  messageToClient = Message.makeMessage(((BlackJackPlayer)game.getPlayers()[x + 1]).getHand());
                   server.outToClients()[x].writeBytes(messageToClient + "\n");
             }
             server.initializeBuffers();
@@ -192,13 +197,14 @@ public class GameServer2
             }
           server.closeSockets();
           server.nuke();
+          System.out.println("NUKED");
 
    }
    public static void main(String argv[]) throws Exception
       {
-                 while(true) {
-                     runServer();
-
-                 }    
+         while(true) {
+                     GameServer2 start = new GameServer2();
+                     start.runServer();
+                 }
       }
 }  

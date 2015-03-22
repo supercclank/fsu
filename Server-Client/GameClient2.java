@@ -46,7 +46,11 @@ public class GameClient2
     this.port = port;
   }
 
- public static void runClient() throws Exception {
+  public GameClient2(){
+    
+  }
+
+ public void runClient() throws Exception {
       String command = "start";
       BlackJackHand playerHand;
       String encodedPlayersHand = "";
@@ -112,7 +116,8 @@ public class GameClient2
 
 public static void main(String argv[]) throws Exception
     {
-      runClient();  
+      GameClient2 g = new GameClient2();
+      g.runClient();  
     }
 
 }
