@@ -5,27 +5,29 @@ public class BlackJackGame extends CardGame {
     private int numberHumans;
     private int humansFinished;
     private int numberBlackJacks;
-
+    private Player[] players;
+    private int current;
     public BlackJackGame(int numHumans, String ip) throws Exception {
         setSize(numHumans + 1);
-        super.addPlayer(new ComputerBlackJackPlayer(ip, 0));
         deck = new BlackJackDeck();
         this.numberHumans = numHumans;
         humansFinished = 0;
         numberBlackJacks = 0;
+        current = 1;
+        players = new Player[numberHumans + 1];
+        players[0] = new ComputerBlackJackPlayer(ip, 0);
     }
 
     // first step in a play
     public void firstStep() {
-        Player[] players = getPlayers();
         ComputerBlackJackPlayer dealer;
         dealer = (ComputerBlackJackPlayer) players[0];
         BlackJackPlayer bp;
         // give the players cards
         for(int y = 0; y < 2; y++) {
             for(int x = 0; x < numberHumans; x++) {
-                bp = (BlackJackPlayer) players[1 + x]; // offset for computer player
-                bp.getCard(deck.getCard());
+                //bp = (BlackJackPlayer) players[1 + x]; // offset for computer player
+                ((BlackJackPlayer) players[1 + x]).getCard(deck.getCard());
             }
             dealer.getCard(deck.getCard());
         }
@@ -38,24 +40,27 @@ public class BlackJackGame extends CardGame {
 
     // remember to offset player number because computer player takes up players[0]
     public void addPlayer(BlackJackPlayer bp) {
-        super.addPlayer(bp);
+        players[current] = bp;
+        current++;
     }
 
     // remaining steps of a play
     public void stepGame() {
-        Player[] players = getPlayers();
+
         ComputerBlackJackPlayer dealer = (ComputerBlackJackPlayer) players[0];
         BlackJackPlayer bp;
         humansFinished = 0;
         numberBlackJacks = 0;
         for(int x = 0; x < numberHumans; x++) {
             bp = (BlackJackPlayer) players[1 + x]; // offset for computer player
-
+            System.out.println(bp.isStick());
+            System.out.println(bp.isBlackJack());
+            System.out.println(bp.isBust());
             if (!bp.isStick() && !bp.isBlackJack() && !bp.isBust()) {
-                bp.getCard(deck.getCard());
-
+                ((BlackJackPlayer) players[1 + x]).getCard(deck.getCard());
+                System.out.println(((BlackJackPlayer)players[1+x]).getHand());
                 if (bp.getHand().size() == 2) {
-                    checkDoubles(bp);
+                    //checkDoubles(bp);
                 }
             }
                 if (bp.isBust()) {
@@ -93,7 +98,6 @@ public class BlackJackGame extends CardGame {
         int max = 0;
         int handValue = 0;
         if (numberBlackJacks == 0) {
-            Player[] players = getPlayers();
             ComputerBlackJackPlayer dealer;
             dealer = (ComputerBlackJackPlayer) players[0];
             max = dealer.getHand().handValue();
@@ -116,5 +120,10 @@ public class BlackJackGame extends CardGame {
         if(0 == bjh[0].compare(bjh[1], new BlackJackCard.BlackJackComparator<Card>())) {
             bp.splittable();
         }
+    }
+
+
+    public Player[] getPlayers() {
+        return players;
     }
 }
